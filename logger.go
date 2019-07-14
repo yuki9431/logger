@@ -3,6 +3,7 @@ package logger
 import (
 	"io"
 	"log"
+	"os"
 )
 
 type logger struct {
@@ -11,6 +12,7 @@ type logger struct {
 
 type Logger interface {
 	Write(...interface{})
+	Fatal(...interface{})
 }
 
 func New(w io.Writer) Logger {
@@ -20,4 +22,9 @@ func New(w io.Writer) Logger {
 func (l *logger) Write(a ...interface{}) {
 	log.SetOutput(l.out)
 	log.Println(a...)
+}
+
+func (l *logger) Fatal(a ...interface{}) {
+	l.Write(a...)
+	os.Exit(1)
 }
