@@ -26,7 +26,7 @@ func main() {
 	defer file.Close()
 
 	l := logger.New(file)
-	l.Writer("Hello World")
+	l.Write("Hello World")
 	...
 }
 ```
